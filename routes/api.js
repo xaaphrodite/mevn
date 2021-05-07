@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const restController = require("../controllers/restController");
+const restController = require("../app/controllers/restController");
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,9 @@ const restController = require("../controllers/restController");
 */
 
 // Middleware
-const upload = require("../middleware/multerMiddleware");
+const upload = require("../app/middleware/multerMiddleware");
 
-// Portal
+// Entry with prefix '/api/mevn'
 route.get("/", restController.multipurpose);
 
 // Endpoint

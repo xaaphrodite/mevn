@@ -6,6 +6,6 @@ module.exports = class mevnContoller {
      */
     static async index(request, response) {
         response.status = 200;
-        response.render('../views/index.ejs')
+        response.render("index.ejs");
     }
 };

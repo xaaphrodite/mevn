@@ -9,7 +9,7 @@ module.exports = class restContoller {
      */
     //! Multipurpose
     static async multipurpose(request, response) {
-        response.redirect('/')
+        response.redirect("/");
     }
 
     /**
@@ -41,7 +41,7 @@ module.exports = class restContoller {
             response.status(200).json(post);
         } catch (error) {
             response.status(404).json({
-                message: `Not found, ${error.message}`
+                message: `Not found, ${error.message}`,
             });
         }
     }

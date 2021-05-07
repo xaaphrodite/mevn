@@ -10,27 +10,38 @@
 |
 */
 
-// Required
+// Dependencies
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Express
-const app = express();
+// Configurations
+const App = express();
 const HOST = process.env.SERVER_HOST || "localhost";
 const PORT = process.env.SERVER_PORT || 8000;
 const URL = `${HOST}:${PORT}`;
+const PATH = require("path");
 
-// Config
-app.use((request, response, next) => {
+// Production conditions
+if (process.env.NODE_ENV === "production") {
+    App.use("/", express.static(PATH.join(__dirname, "/dist"))).get(
+        /.*/,
+        (request, response) => {
+            response.sendFile(PATH.join(__dirname, "/dist/index.html"));
+        }
+    );
+}
+
+App.use((request, response, next) => {
     console.log(`${request.method} ${request.protocol}://${URL}${request.url}`);
     next();
 })
     .use(cors())
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
-    .use(express.static(__dirname + "/public"))
+    .use(express.static(PATH.join(__dirname + "/public")))
+    .use(express.static(PATH.join(__dirname + "/views")))
     .set("view engine", "ejs")
     // Route prefix
     .use("/", require("./routes/web"))
@@ -50,13 +61,11 @@ mongoose
         useFindAndModify: false,
     })
     .then(() => {
-        console.log("Go Ahead..");
+        console.log("Go ahead..");
     })
     .catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 
 // Server listen
-app.listen(PORT, () =>
-    console.log(`mevn server is running on http://${URL}`)
-);
+App.listen(PORT, () => console.log(`mevn is listening on http://${URL}`));

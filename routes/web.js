@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const mevnController = require("../controllers/mevnController");
+const mevnController = require("../app/controllers/mevnController");
 
 /*
 |--------------------------------------------------------------------------
