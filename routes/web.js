@@ -1,3 +1,5 @@
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 const express = require("express");
 const route = express.Router();
 const mevnController = require("../app/controllers/mevnController");
@@ -13,6 +15,6 @@ const mevnController = require("../app/controllers/mevnController");
 |
 */
 
-route.get("/", mevnController.index);
+route.get("/", csrfProtection, mevnController.index);
 
 module.exports = route;

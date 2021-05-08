@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Quicksand", sans-serif;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
+
+  <title>Not found |MEVN</title>
+</head>
+
+<body>
+  <div class="container mt-3">
+    <div id="vue"></div>
+    <hr>
+  </div>
+  <script>
+    const vue = Vue.createApp({
+      template: "<h5 style='color: #85BF0C;'>There is nothing here.. redirecting in {{ timeLeft }}</h5>",
+      data() {
+        return {
+          timeLeft: "Five"
+        }
+      },
+      mounted() {
+        this.counter();
+      },
+      methods: {
+        counter() {
+          let countdown = ["Four", "Three", "Two", "One"]
+          let i = 0
+          setInterval(() => {
+            if (i >= countdown.length) {
+              clearInterval()
+              window.location.replace('/dev')
+            }
+            this.timeLeft = countdown[i]
+            i++
+          }, 1000)
+        }
+      }
+    });
+    vue.mount("#vue")
+  </script>
+</body>
+
+</html>
