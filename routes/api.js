@@ -1,6 +1,5 @@
 const express = require("express");
 const route = express.Router();
-const restController = require("../app/controllers/restController");
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +12,20 @@ const restController = require("../app/controllers/restController");
 |
 */
 
-// Middleware
+//? Specific middleware always in array![]
 const upload = require("../app/middleware/multerMiddleware");
 
-// Entry with prefix '/api/mevn'
+//? Controller
+const restController = require("../app/controllers/restController");
+
+//? Entry with prefix '/api/mevn'
 route.get("/", restController.multipurpose);
 
-// Endpoint
-route.get("/mevn", restController.fetchAllPost);
-route.get("/mevn/:id", restController.fetchPostByID);
-route.post("/mevn", upload, restController.createPost);
-route.patch("/mevn/:id", upload, restController.updatePost);
-route.delete("/mevn/:id", restController.deletePost);
+//? Endpoint
+route.get("/node", restController.fetchAllPost);
+route.get("/node/:id", restController.fetchPostByID);
+route.post("/node", [upload], restController.createPost);
+route.patch("/node/:id", [upload], restController.updatePost);
+route.delete("/node/:id", restController.deletePost);
 
 module.exports = route;

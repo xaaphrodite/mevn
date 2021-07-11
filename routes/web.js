@@ -1,8 +1,5 @@
-const csrf = require("csurf");
-const csrfProtection = csrf({ cookie: true });
 const express = require("express");
 const route = express.Router();
-const mevnController = require("../app/controllers/mevnController");
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +12,18 @@ const mevnController = require("../app/controllers/mevnController");
 |
 */
 
-route.get("/", csrfProtection, mevnController.index);
+// Middleware always in array![]
+const csrfProtection = require("../app/middleware/csrfMiddleware");
+
+// Global middleware
+route.use(csrfProtection, (request, response, next) => {
+    response.cookie("saveMe", request.csrfToken());
+    next();
+});
+
+// Controller
+const mevnController = require("../app/controllers/nodeController");
+
+route.get("/", mevnController.index);
 
 module.exports = route;
