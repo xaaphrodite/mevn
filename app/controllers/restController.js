@@ -1,4 +1,5 @@
-const Post = require("../models/post");
+const Users = require("../models/users");
+const Posts = require("../models/posts");
 const fs = require("fs");
 
 module.exports = class restContoller {
@@ -20,7 +21,7 @@ module.exports = class restContoller {
     //! Fetch all post
     static async fetchAllPost(request, response) {
         try {
-            const post = await Post.find();
+            const post = await Posts.find();
             response.status(200).json(post);
         } catch (error) {
             response.status(404).json({ message: "Not Found" });
@@ -37,7 +38,7 @@ module.exports = class restContoller {
     static async fetchPostByID(request, response) {
         const id = request.params.id;
         try {
-            const post = await Post.findById(id);
+            const post = await Posts.findById(id);
             response.status(200).json(post);
         } catch (error) {
             response.status(404).json({
@@ -55,10 +56,10 @@ module.exports = class restContoller {
     static async createPost(request, response) {
         const post = request.body;
         const imageName = request.file.filename;
-        post.image = imageName;
+        posts.image = imageName;
 
         try {
-            await Post.create(post);
+            await Posts.create(post);
             response.status(201).json({
                 message: "Post created successfully",
                 data: post,
@@ -90,10 +91,10 @@ module.exports = class restContoller {
             new_image = request.body.old_image;
         }
         const newPost = request.body;
-        newPost.image = new_image;
+        newPosts.image = new_image;
 
         try {
-            await Post.findByIdAndUpdate(id, newPost);
+            await Posts.findByIdAndUpdate(id, newPost);
             response.status(200).json({ message: "Post update successfully" });
         } catch (error) {
             response.status(404).json({ message: error.message });
@@ -110,7 +111,7 @@ module.exports = class restContoller {
     static async deletePost(request, response) {
         const id = request.params.id;
         try {
-            const result = await Post.findByIdAndDelete(id);
+            const result = await Posts.findByIdAndDelete(id);
             if (result.image != "") {
                 try {
                     fs.unlinkSync("public/uploads/post/" + result.image);
