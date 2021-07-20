@@ -18,7 +18,7 @@ const upload = require("../app/middleware/multerMiddleware");
 //? Controller
 const restController = require("../app/controllers/restController");
 
-//? Entry with prefix '/api/mevn'
+//? Entry with prefix '/api'
 route.get("/", restController.multipurpose);
 
 //? Endpoint
