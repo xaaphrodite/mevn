@@ -22,8 +22,8 @@ route.use(csrfProtection, (request, response, next) => {
 });
 
 // Controller
-const mevnController = require("../app/controllers/nodeController");
+const nodeController = require("../app/controllers/nodeController");
 
-route.get("/", mevnController.index);
+route.get("/", nodeController.index);
 
 module.exports = route;

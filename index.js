@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| Node Web-server
+| Node Web-server Copyright © 2021 rasetnsyh All Rights Reserved
 |--------------------------------------------------------------------------
 |
 | Author    : rasetiansyah
@@ -36,7 +36,7 @@ const CONF = {
 const csrfProtection = require("./app/middleware/csrfMiddleware");
 
 // Production conditions
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "production") {
     App.use((request, response, next) => {
         console.log(`${request.method} ${URI}${request.url}`);
         next();
@@ -87,24 +87,38 @@ App.use((request, response, next) => {
         response.redirect("/");
     });
 
-// MongoDB
-mongoose
-    .connect(process.env.DB_URI, {
-        useFindAndModify: false,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-    })
-    .then(() => {
-        console.log("Go ahead..");
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+// Database
+if (process.env.DB_CONNECTION === "mongodb") {
+    mongoose
+        .connect(process.env.DB_URI, {
+            useFindAndModify: false,
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+        })
+        .then(() => {
+            console.log("MongoDB connected");
+        })
+        .catch(() => {
+            console.log("MongoDB not connected");
+        });
+} else if (process.env.DB_CONNECTION === "mysql") {
+    const DB = require("./config/Mysql");
+    try {
+        DB.sequelize.sync();
+        console.log("MySQL connected");
+    } catch (error) {
+        console.log("MySQL not connected");
+    }
+} else if (process.env.DB_CONNECTION === "") {
+    console.log("No Database selected");
+} else {
+    console.log("Go Ahead..");
+}
 
 // Server listen
 App.listen(PORT, () =>
-    console.log(`CORS|CSRF enabled, Node Web-server is listening on ${URI}`)
+    console.log(`CORS|CSRF enabled, xphrdite_web_server is listening on ${URI}`)
 );
 
 // Test

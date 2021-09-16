@@ -16,16 +16,16 @@ const route = express.Router();
 const upload = require("../app/middleware/multerMiddleware");
 
 //? Controller
-const restController = require("../app/controllers/restController");
+const restControllerMongo = require("../app/controllers/example/restControllerMongo");
 
 //? Entry with prefix '/api'
-route.get("/", restController.multipurpose);
+route.get("/", restControllerMongo.multipurpose);
 
 //? Endpoint
-route.get("/node", restController.fetchAllPost);
-route.get("/node/:id", restController.fetchPostByID);
-route.post("/node", [upload], restController.createPost);
-route.patch("/node/:id", [upload], restController.updatePost);
-route.delete("/node/:id", restController.deletePost);
+route.get("/xphrdite", restControllerMongo.fetchAllPost);
+route.get("/xphrdite/:id", restControllerMongo.fetchPostByID);
+route.post("/xphrdite", [upload], restControllerMongo.createPost);
+route.patch("/xphrdite/:id", [upload], restControllerMongo.updatePost);
+route.delete("/xphrdite/:id", restControllerMongo.deletePost);
 
 module.exports = route;

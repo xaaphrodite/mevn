@@ -1,5 +1,5 @@
-const Users = require("../models/users");
-const Posts = require("../models/posts");
+const Users = require("../../models/mongodb/users");
+const Posts = require("../../models/mongodb/posts");
 const fs = require("fs");
 
 module.exports = class restContoller {
