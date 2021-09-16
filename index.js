@@ -110,10 +110,8 @@ if (process.env.DB_CONNECTION === "mongodb") {
     } catch (error) {
         console.log("MySQL not connected");
     }
-} else if (process.env.DB_CONNECTION === "") {
-    console.log("No Database selected");
 } else {
-    console.log("Go Ahead..");
+    console.log("No Database selected");
 }
 
 // Server listen
