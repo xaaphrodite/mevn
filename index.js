@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| Node Web-server Copyright © 2021 rasetnsyh All Rights Reserved
+| Node Web-server Copyright © 2021 rvnrstnsyh All Rights Reserved
 |--------------------------------------------------------------------------
 |
 | Author    : rasetiansyah
@@ -35,8 +35,23 @@ const CONF = {
 // CSRF
 const csrfProtection = require("./app/middleware/csrfMiddleware");
 
+// Global Request Limit
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 70, // Limit each IP to 70 requests per windowMs
+    message: {
+        status: false,
+        code: 429,
+        message: "Too many requests, Your IP is temporarily blocked.",
+    },
+});
+
+//  Apply to all requests
+App.use(limiter);
+
 // Production conditions
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
     App.use((request, response, next) => {
         console.log(`${request.method} ${URI}${request.url}`);
         next();

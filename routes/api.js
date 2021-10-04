@@ -12,6 +12,7 @@ const route = express.Router();
 |
 */
 
+//! EXAMPLE
 //? Specific middleware always in array![]
 const upload = require("../app/middleware/multerMiddleware");
 
@@ -22,10 +23,10 @@ const restControllerMongo = require("../app/controllers/example/restControllerMo
 route.get("/", restControllerMongo.multipurpose);
 
 //? Endpoint
-route.get("/xphrdite", restControllerMongo.fetchAllPost);
-route.get("/xphrdite/:id", restControllerMongo.fetchPostByID);
-route.post("/xphrdite", [upload], restControllerMongo.createPost);
-route.patch("/xphrdite/:id", [upload], restControllerMongo.updatePost);
-route.delete("/xphrdite/:id", restControllerMongo.deletePost);
+route.get("/node", restControllerMongo.fetchAllPost);
+route.get("/node/:id", restControllerMongo.fetchPostByID);
+route.post("/node", [upload], restControllerMongo.createPost);
+route.patch("/node/:id", [upload], restControllerMongo.updatePost);
+route.delete("/node/:id", restControllerMongo.deletePost);
 
 module.exports = route;

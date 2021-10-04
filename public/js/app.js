@@ -2,7 +2,7 @@ const api = document.getElementById("api");
 api.innerHTML = `${window.location.protocol}${window.location.hostname}:${window.location.port}/api/node`;
 
 const author = document.getElementById("author");
-author.innerHTML = "by rasetiansyah";
+author.innerHTML = "by rvnrstnsyh";
 
 let typed = new Typed(".typing", {
     strings: [`SERVER SIDE.`],

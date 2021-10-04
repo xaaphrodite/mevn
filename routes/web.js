@@ -12,16 +12,17 @@ const route = express.Router();
 |
 */
 
-// Middleware always in array![]
+//! EXAMPLE
+//? Middleware always in array![]
 const csrfProtection = require("../app/middleware/csrfMiddleware");
 
-// Global middleware
+//? Global middleware
 route.use(csrfProtection, (request, response, next) => {
     response.cookie("saveMe", request.csrfToken());
     next();
 });
 
-// Controller
+//? Controller
 const nodeController = require("../app/controllers/nodeController");
 
 route.get("/", nodeController.index);
