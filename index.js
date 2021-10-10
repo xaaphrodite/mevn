@@ -47,6 +47,9 @@ const limiter = rateLimit({
     },
 });
 
+// Information Security
+const Helmet = require("helmet");
+
 //  Apply to all requests
 App.use(limiter);
 
