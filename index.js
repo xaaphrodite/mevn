@@ -49,6 +49,7 @@ const limiter = rateLimit({
 
 // Information Security
 const Helmet = require("helmet");
+App.use(Helmet.hidePoweredBy({ setTo: "PHP 4.2.0" }));
 
 //  Apply to all requests
 App.use(limiter);
