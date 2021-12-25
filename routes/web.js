@@ -12,11 +12,10 @@ const route = express.Router();
 |
 */
 
-//! EXAMPLE
-//? Middleware always in array![]
+//! CSRF
 const csrfProtection = require("../app/middleware/csrfMiddleware");
 
-//? Global middleware
+//? Global middleware for web
 route.use(csrfProtection, (request, response, next) => {
     response.cookie("saveMe", request.csrfToken());
     next();

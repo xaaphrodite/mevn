@@ -16,6 +16,7 @@
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
 
     ::-webkit-scrollbar {
       display: none;
@@ -34,6 +35,32 @@
       user-select: none;
     }
 
+    .silentclouds__mark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0.5;
+    }
+
+    .silentclouds__mark .logo {
+      width: 110px;
+    }
+
+    .silentclouds__mark h1 {
+      font-family: "Major Mono Display", monospace;
+      font-size: 1em;
+      width: 200px;
+      font-weight: 800;
+      width: 300px;
+      color: gray;
+    }
+
+    .silentclouds__mark h1:hover {
+      color: orange;
+    }
+
     a {
       text-decoration: none;
     }
@@ -45,17 +72,23 @@
   <link rel="icon" href="/node.png" type="image/icon">
   <title>Client |MEVN</title>
 </head>
-<!-- rasetiansyah -->
+
 <body>
   <div class="container" style="margin-top: 15px;">
     <h2 style="color: #57646f;">Node Web-server <img src="/node.png" style="width: 50px;">
       <span class="typing" style="color: #85BF0C;font-size: medium;"></span>
     </h2>
-    <p id="api" style="color: #57646f; font-size: 11px;margin-top: -20px;margin-left: 2px;"></p>
+    <p id="api" style="color: #57646f; font-size: 11px;margin-top: -15px;margin-left: 2px;"></p>
     <a href="https://github.com/xaaphrodite" style="color: #85BF0C;">
       <p id="author" style="font-size: 11px;margin-top: -20px; text-align: end;"></p>
     </a>
     <hr style="margin-top: -15px;">
+  </div>
+  <div class="silentclouds__mark">
+    <img class="logo" src="/silent.png" alt="">
+    <a href="https://silentclouds.rest" target="_blank">
+      <h1>https://silentclouds.rest</h1>
+    </a>
   </div>
   <!-- Custom JavaScript -->
   <script>
@@ -63,7 +96,7 @@
     api.innerHTML = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
 
     const author = document.getElementById("author");
-    author.innerHTML = "by rvnrstnsyh";
+    author.innerHTML = "rvnrstnsyh";
 
     let typed = new Typed(".typing", {
       strings: [`CLIENT SIDE.`],

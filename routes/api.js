@@ -12,21 +12,4 @@ const route = express.Router();
 |
 */
 
-//! EXAMPLE
-//? Specific middleware always in array![]
-const upload = require("../app/middleware/multerMiddleware");
-
-//? Controller
-const restControllerMongo = require("../app/controllers/example/restControllerMongo");
-
-//? Entry with prefix '/api'
-route.get("/", restControllerMongo.multipurpose);
-
-//? Endpoint
-route.get("/node", restControllerMongo.fetchAllPost);
-route.get("/node/:id", restControllerMongo.fetchPostByID);
-route.post("/node", [upload], restControllerMongo.createPost);
-route.patch("/node/:id", [upload], restControllerMongo.updatePost);
-route.delete("/node/:id", restControllerMongo.deletePost);
-
 module.exports = route;
